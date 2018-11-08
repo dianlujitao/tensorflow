@@ -16,20 +16,26 @@
 # tf_core_cpu library
 ########################################################
 file(GLOB_RECURSE tf_core_cpu_srcs
+    #[[
     "${tensorflow_source_dir}/tensorflow/cc/saved_model/*.h"
     "${tensorflow_source_dir}/tensorflow/cc/saved_model/*.cc"
+    ]]
     "${tensorflow_source_dir}/tensorflow/core/common_runtime/*.h"
     "${tensorflow_source_dir}/tensorflow/core/common_runtime/*.cc"
+    #[[
     "${tensorflow_source_dir}/tensorflow/core/debug/*.h"
     "${tensorflow_source_dir}/tensorflow/core/debug/*.cc"
     "${tensorflow_source_dir}/tensorflow/core/distributed_runtime/server_lib.h"
     "${tensorflow_source_dir}/tensorflow/core/distributed_runtime/server_lib.cc"
+    ]]
     "${tensorflow_source_dir}/tensorflow/core/graph/*.h"
     "${tensorflow_source_dir}/tensorflow/core/graph/*.cc"
+    #[[
     "${tensorflow_source_dir}/tensorflow/core/grappler/*.h"
     "${tensorflow_source_dir}/tensorflow/core/grappler/*.cc"
     "${tensorflow_source_dir}/tensorflow/core/grappler/*/*.h"
     "${tensorflow_source_dir}/tensorflow/core/grappler/*/*.cc"
+    ]]
     "${tensorflow_source_dir}/tensorflow/core/public/*.h"
 )
 
@@ -62,6 +68,7 @@ file(GLOB_RECURSE tf_core_cpu_exclude_srcs
     "${tensorflow_source_dir}/tensorflow/core/grappler/clusters/single_machine.cc"
     "${tensorflow_source_dir}/tensorflow/core/grappler/inputs/trivial_test_graph_input_yielder.h"
     "${tensorflow_source_dir}/tensorflow/core/grappler/inputs/trivial_test_graph_input_yielder.cc"
+    "${tensorflow_source_dir}/tensorflow/core/common_runtime/eager/*"
 )
 file(GLOB_RECURSE tf_core_cpu_whitelisted_srcs
     "${tensorflow_source_dir}/tensorflow/core/common_runtime/gpu/gpu_id.h"

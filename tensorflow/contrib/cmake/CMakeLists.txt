@@ -224,23 +224,31 @@ if (tensorflow_ENABLE_JEMALLOC_SUPPORT)
   add_definitions(-DTENSORFLOW_USE_JEMALLOC -DJEMALLOC_EXPORT=)
 endif()
 
+add_definitions(-DIS_MOBILE_PLATFORM)
+
 # External dependencies
 include(zlib)
+#[[
 include(gif)
 include(png)
 include(jpeg)
 include(lmdb)
+]]
 include(eigen)
 include(gemmlowp)
+#[[
 include(jsoncpp)
 include(farmhash)
 include(fft2d)
 include(highwayhash)
+]]
 include(nsync)
 include(protobuf)
+#[[
 include(re2)
 include(cub)
 include(sqlite)
+]]
 include(double_conversion)
 include(abseil_cpp)
 if (tensorflow_BUILD_CC_TESTS)
@@ -252,6 +260,7 @@ link_directories(${ADD_LINK_DIRECTORY})
 
 set(tensorflow_EXTERNAL_LIBRARIES
     ${tensorflow_EXTERNAL_LIBRARIES}
+    #[[
     ${gif_STATIC_LIBRARIES}
     ${png_STATIC_LIBRARIES}
     ${jpeg_STATIC_LIBRARIES}
@@ -260,10 +269,13 @@ set(tensorflow_EXTERNAL_LIBRARIES
     ${farmhash_STATIC_LIBRARIES}
     ${fft2d_STATIC_LIBRARIES}
     ${highwayhash_STATIC_LIBRARIES}
+    ]]
     ${nsync_STATIC_LIBRARIES}
     ${protobuf_STATIC_LIBRARIES}
+    #[[
     ${re2_STATIC_LIBRARIES}
     ${sqlite_STATIC_LIBRARIES}
+    ]]
     ${double_conversion_STATIC_LIBRARIES}
 )
 
@@ -277,6 +289,7 @@ endif (systemlib_ZLIB)
 
 set(tensorflow_EXTERNAL_DEPENDENCIES
     zlib_copy_headers_to_destination
+    #[[
     gif_copy_headers_to_destination
     png_copy_headers_to_destination
     jpeg_copy_headers_to_destination
@@ -284,14 +297,17 @@ set(tensorflow_EXTERNAL_DEPENDENCIES
     jsoncpp
     farmhash_copy_headers_to_destination
     highwayhash_copy_headers_to_destination
+    ]]
     nsync_copy_headers_to_destination
     protobuf
     eigen
     gemmlowp
+    #[[
     cub
     fft2d
     re2
     sqlite_copy_headers_to_destination
+    ]]
     double_conversion
 )
 
@@ -301,20 +317,26 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     # External dependencies.
     ${zlib_INCLUDE_DIR}
+    #[[
     ${gif_INCLUDE_DIR}
     ${png_INCLUDE_DIR}
     ${jpeg_INCLUDE_DIR}
     ${lmdb_INCLUDE_DIR}
+    ]]
     ${eigen_INCLUDE_DIRS}
     ${gemmlowp_INCLUDE_DIR}
+    #[[
     ${jsoncpp_INCLUDE_DIR}
     ${farmhash_INCLUDE_DIR}
     ${highwayhash_INCLUDE_DIR}
     ${cub_INCLUDE_DIR}
+    ]]
     ${nsync_INCLUDE_DIR}
     ${PROTOBUF_INCLUDE_DIRS}
+    #[[
     ${re2_INCLUDE_DIR}
     ${sqlite_INCLUDE_DIR}
+    ]]
     ${double_conversion_INCLUDE_DIR}
 )
 
@@ -531,10 +553,12 @@ if(tensorflow_ENABLE_GRPC_SUPPORT)
   include(tf_core_distributed_runtime.cmake)
 endif()
 # We include tf_cc_ops first, because tf_c depends on tf_cc.
+#[[
 include(tf_cc_ops.cmake)
 include(tf_c.cmake)
 include(tf_grappler.cmake)
 include(tf_core_profiler.cmake)
+]]
 if(tensorflow_BUILD_CC_EXAMPLE)
   include(tf_tutorials.cmake)
   include(tf_label_image_example.cmake)

@@ -214,6 +214,16 @@ else()
   list(REMOVE_ITEM tf_core_platform_srcs ${tf_core_platform_srcs_exclude})
 endif()
 
+file(GLOB_RECURSE tf_core_platform_exclude_srcs
+    "${tensorflow_source_dir}/tensorflow/core/platform/default/test_benchmark.*"
+    "${tensorflow_source_dir}/tensorflow/core/platform/cuda.h"
+    "${tensorflow_source_dir}/tensorflow/core/platform/gif.h"
+    "${tensorflow_source_dir}/tensorflow/core/platform/jpeg.h"
+    "${tensorflow_source_dir}/tensorflow/core/platform/png.h"
+    "${tensorflow_source_dir}/tensorflow/core/platform/stream_executor.*"
+)
+list(REMOVE_ITEM tf_core_platform_srcs ${tf_core_platform_exclude_srcs})
+
 list(APPEND tf_core_lib_srcs ${tf_core_platform_srcs})
 
 if(UNIX)
@@ -250,6 +260,19 @@ file(GLOB_RECURSE tf_core_lib_test_srcs
     "${tensorflow_source_dir}/tensorflow/core/public/*test*.h"
 )
 list(REMOVE_ITEM tf_core_lib_srcs ${tf_core_lib_test_srcs})
+
+file(GLOB_RECURSE tf_core_lib_exclude_srcs
+    "${tensorflow_source_dir}/tensorflow/core/lib/db/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/jpeg/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/png/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/gif/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/wav/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/io/snappy/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/monitoring/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/gtl/*"
+    "${tensorflow_source_dir}/tensorflow/core/lib/histogram/*"
+)
+list(REMOVE_ITEM tf_core_lib_srcs ${tf_core_lib_exclude_srcs})
 
 add_library(tf_core_lib OBJECT ${tf_core_lib_srcs})
 add_dependencies(tf_core_lib ${tensorflow_EXTERNAL_DEPENDENCIES} tf_protos_cc)
@@ -291,8 +314,10 @@ file(GLOB_RECURSE tf_core_framework_srcs
     "${tensorflow_source_dir}/tensorflow/core/common_runtime/session.cc"
     "${tensorflow_source_dir}/tensorflow/core/common_runtime/session_factory.cc"
     "${tensorflow_source_dir}/tensorflow/core/common_runtime/session_options.cc"
+    #[[
     "${tensorflow_source_dir}/tensorflow/contrib/tensorboard/db/*.cc"
     "${tensorflow_source_dir}/tensorflow/contrib/tensorboard/db/*.h"
+    ]]
     "${tensorflow_source_dir}/public/*.h"
 )
 
@@ -309,6 +334,17 @@ file(GLOB_RECURSE tf_core_framework_exclude_srcs
     "${tensorflow_source_dir}/tensorflow/contrib/tensorboard/db/*test*.cc"
     "${tensorflow_source_dir}/tensorflow/contrib/tensorboard/db/loader.cc"
     "${tensorflow_source_dir}/tensorflow/contrib/tensorboard/db/vacuum.cc"
+    "${tensorflow_source_dir}/tensorflow/core/framework/op_gen_*"
+    "${tensorflow_source_dir}/tensorflow/core/util/events_writer.*"
+    "${tensorflow_source_dir}/tensorflow/core/util/stat_summarizer*"
+    "${tensorflow_source_dir}/tensorflow/core/util/stats_calculator.*"
+    "${tensorflow_source_dir}/tensorflow/core/util/reporter.*"
+    "${tensorflow_source_dir}/tensorflow/core/util/ctc/*"
+    "${tensorflow_source_dir}/tensorflow/core/util/proto/*"
+    "${tensorflow_source_dir}/tensorflow/core/util/rpc/*"
+    "${tensorflow_source_dir}/tensorflow/core/util/sparse/*"
+    "${tensorflow_source_dir}/tensorflow/core/util/tensor_bundle/*"
+    "${tensorflow_source_dir}/tensorflow/core/util/example*"
 )
 
 # TODO(jart): Why doesn't this work?

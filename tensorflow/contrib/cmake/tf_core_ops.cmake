@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+#[[
 set(tf_op_lib_names
     "audio_ops"
     "array_ops"
@@ -126,10 +127,12 @@ file(GLOB_RECURSE tf_user_ops_srcs
 add_library(tf_user_ops OBJECT ${tf_user_ops_srcs})
 
 add_dependencies(tf_user_ops tf_core_framework)
+]]
 
 ########################################################
 # tf_core_ops library
 ########################################################
+#[[
 file(GLOB_RECURSE tf_core_ops_srcs
     "${tensorflow_source_dir}/tensorflow/core/ops/*.h"
     "${tensorflow_source_dir}/tensorflow/core/ops/*.cc"
@@ -148,6 +151,16 @@ file(GLOB_RECURSE tf_core_ops_exclude_srcs
 )
 
 list(REMOVE_ITEM tf_core_ops_srcs ${tf_core_ops_exclude_srcs})
+]]
+file(GLOB_RECURSE tf_core_ops_srcs
+    "${tensorflow_source_dir}/tensorflow/core/ops/sendrecv_ops.cc"
+    "${tensorflow_source_dir}/tensorflow/core/ops/function_ops.cc"
+    "${tensorflow_source_dir}/tensorflow/core/ops/functional_ops.cc"
+    "${tensorflow_source_dir}/tensorflow/core/ops/array_ops.cc"
+    "${tensorflow_source_dir}/tensorflow/core/ops/math_ops.cc"
+    "${tensorflow_source_dir}/tensorflow/core/ops/nn_ops.cc"
+    "${tensorflow_source_dir}/tensorflow/core/ops/no_op.cc"
+)
 
 add_library(tf_core_ops OBJECT ${tf_core_ops_srcs})
 
@@ -157,6 +170,7 @@ add_dependencies(tf_core_ops tf_core_cpu)
 # tf_debug_ops library
 ########################################################
 
+#[[
 file(GLOB tf_debug_ops_srcs
     "${tensorflow_source_dir}/tensorflow/core/ops/debug_ops.cc"
 )
@@ -164,3 +178,4 @@ file(GLOB tf_debug_ops_srcs
 add_library(tf_debug_ops OBJECT ${tf_debug_ops_srcs})
 
 add_dependencies(tf_debug_ops tf_core_framework)
+]]

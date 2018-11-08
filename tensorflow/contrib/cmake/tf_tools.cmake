@@ -37,6 +37,7 @@ if(tensorflow_ENABLE_GRPC_SUPPORT)
     add_dependencies(${proto_text} grpc)
 endif(tensorflow_ENABLE_GRPC_SUPPORT)
 
+#[[
 file(GLOB_RECURSE tf_tools_transform_graph_lib_srcs
     "${tensorflow_source_dir}/tensorflow/tools/graph_transforms/*.h"
     "${tensorflow_source_dir}/tensorflow/tools/graph_transforms/*.cc"
@@ -149,3 +150,4 @@ install(TARGETS ${transform_graph} ${summarize_graph} ${compare_graphs} ${benchm
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib)
+]]

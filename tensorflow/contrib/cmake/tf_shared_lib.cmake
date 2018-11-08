@@ -23,17 +23,21 @@ if(WIN32)
   # we need.
   #
   add_library(tensorflow_static STATIC
+      #[[
       $<TARGET_OBJECTS:tf_c>
       $<TARGET_OBJECTS:tf_cc>
       $<TARGET_OBJECTS:tf_cc_framework>
       $<TARGET_OBJECTS:tf_cc_ops>
       $<TARGET_OBJECTS:tf_cc_while_loop>
+      ]]
       $<TARGET_OBJECTS:tf_core_lib>
       $<TARGET_OBJECTS:tf_core_cpu>
       $<TARGET_OBJECTS:tf_core_framework>
       $<TARGET_OBJECTS:tf_core_ops>
       $<TARGET_OBJECTS:tf_core_direct_session>
+      #[[
       $<TARGET_OBJECTS:tf_tools_transform_graph_lib>
+      ]]
       $<$<BOOL:${tensorflow_ENABLE_GRPC_SUPPORT}>:$<TARGET_OBJECTS:tf_core_distributed_runtime>>
       $<TARGET_OBJECTS:tf_core_kernels>
       $<$<BOOL:${tensorflow_ENABLE_GPU}>:$<TARGET_OBJECTS:tf_core_kernels_cpu_only>>
@@ -65,17 +69,21 @@ endif(WIN32)
 # tensorflow is a shared library containing all of the
 # TensorFlow runtime and the standard ops and kernels.
 add_library(tensorflow SHARED
+    #[[
     $<TARGET_OBJECTS:tf_c>
     $<TARGET_OBJECTS:tf_cc>
     $<TARGET_OBJECTS:tf_cc_framework>
     $<TARGET_OBJECTS:tf_cc_ops>
     $<TARGET_OBJECTS:tf_cc_while_loop>
+    ]]
     $<TARGET_OBJECTS:tf_core_lib>
     $<TARGET_OBJECTS:tf_core_cpu>
     $<TARGET_OBJECTS:tf_core_framework>
     $<TARGET_OBJECTS:tf_core_ops>
     $<TARGET_OBJECTS:tf_core_direct_session>
+    #[[
     $<TARGET_OBJECTS:tf_tools_transform_graph_lib>
+    ]]
     $<$<BOOL:${tensorflow_ENABLE_GRPC_SUPPORT}>:$<TARGET_OBJECTS:tf_core_distributed_runtime>>
     $<TARGET_OBJECTS:tf_core_kernels>
     $<$<BOOL:${tensorflow_ENABLE_GPU}>:$<$<BOOL:${BOOL_WIN32}>:$<TARGET_OBJECTS:tf_core_kernels_cpu_only>>>
